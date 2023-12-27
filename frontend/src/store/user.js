@@ -43,10 +43,15 @@ const ModuleUser = {
             $.ajax({
                 url: "http://127.0.0.1:3000/user/account/token/",
                 type: "POST",
-                data: {
-                    username: data.username,
-                    password: data.password,
-                },
+                contentType: "application/json",
+                data : JSON.stringify({
+                    "username": data.username,
+                    "password": data.password
+                }),
+                // data: {
+                //     username: data.username,
+                //     password: data.password,
+                // },
                 success(resp) {
                     if (resp.error_message === "success") {
                         localStorage.setItem("jwt_token", resp.token);
