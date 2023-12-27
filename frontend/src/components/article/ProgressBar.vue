@@ -5,7 +5,7 @@
       <form @submit.prevent="post_a_reply">
         <div class="mb-3">
           <label for="content" class="form-label">回复内容</label>
-          <textarea v-model="content" type="password" class="form-control" id="content"></textarea>
+          <textarea v-model="content" type="text" class="form-control" id="content"></textarea>
         </div>
         <div class="error-message">{{ error_message }}</div>
         <button type="submit" class="btn btn-primary">发送</button>
@@ -87,6 +87,7 @@ export default {
     let content = ref('');
     let error_message = ref('');
     const post_a_reply = () => {
+      console.log("1");
       error_message.value = "";
       $.ajax({
         url: "http://127.0.0.1:3000/reply/add/",
@@ -110,10 +111,12 @@ export default {
               }
             });
           } else {
+            console.log("2");
             error_message.value = resp.error_message;
           }
         },
         error() {
+          console.log("3");
           error_message.value = "服务异常";
         }
       })
